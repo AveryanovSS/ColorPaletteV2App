@@ -130,7 +130,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
-                                    <segue destination="qi6-M8-Huw" kind="unwind" unwindAction="unwindSegueWithSegue:" id="yEG-IY-kzr"/>
+                                    <action selector="donePressed" destination="7Sh-BT-HaX" eventType="touchUpInside" id="F9h-cG-Fgj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -159,7 +159,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5a-1P-o6f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="qi6-M8-Huw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="542.52336448598123" y="174.94600431965443"/>
         </scene>

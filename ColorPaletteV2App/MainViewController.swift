@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ColorSettingsViewControllerDelegate {
+    func setNewColor(for rgbColors: RGBColors)
+}
+
 class MainViewController: UIViewController {
     
     private var rgbColors = RGBColors(red: 255, green: 255, blue: 255)
@@ -20,13 +24,7 @@ class MainViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let colorSettingsVC = segue.destination as? ColorSettingsViewController else { return }
         colorSettingsVC.rgbColors = rgbColors
-    }
-    
-    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
-        guard let colorSettingsVC = segue.source as? ColorSettingsViewController else { return }
-        rgbColors = colorSettingsVC.rgbColors
-        
-        SetupUI()
+        colorSettingsVC.delegate = self
     }
 }
 
@@ -38,5 +36,12 @@ extension MainViewController {
             blue: CGFloat(rgbColors.blue / 255),
             alpha: 1
         )
+    }
+}
+
+extension MainViewController: ColorSettingsViewControllerDelegate {
+    func setNewColor(for rgbColors: RGBColors) {
+        self.rgbColors = rgbColors
+        SetupUI()
     }
 }

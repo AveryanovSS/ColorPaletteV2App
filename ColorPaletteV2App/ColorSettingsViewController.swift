@@ -20,6 +20,7 @@ class ColorSettingsViewController: UIViewController {
     @IBOutlet var blueSlider: UISlider!
     
     var rgbColors: RGBColors!
+    var delegate: ColorSettingsViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +30,8 @@ class ColorSettingsViewController: UIViewController {
         redSlider.minimumTrackTintColor = .red
         greenSlider.minimumTrackTintColor = .green
         
-        redSlider.value = rgbColors.red
-        greenSlider.value = rgbColors.green
-        blueSlider.value = rgbColors.blue
-        
+
+        SetupUI()
         setColor()
     }
     
@@ -46,9 +45,23 @@ class ColorSettingsViewController: UIViewController {
         }
     }
     
+    @IBAction func donePressed() {
+        delegate.setNewColor(for: rgbColors)
+        dismiss(animated: true)
+    }
 }
 
 extension ColorSettingsViewController {
+    private func SetupUI() {
+        redLabel.text = String(Int(rgbColors.red))
+        greenLabel.text = String(Int(rgbColors.green))
+        blueLabel.text = String(Int(rgbColors.blue))
+        
+        redSlider.value = rgbColors.red
+        greenSlider.value = rgbColors.green
+        blueSlider.value = rgbColors.blue
+    }
+    
     private func setColor() {
         colorView.backgroundColor = UIColor(
             red: CGFloat(redSlider.value / 255),
